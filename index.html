@@ -63,15 +63,20 @@
                 <label for="name">Nom et Prénom :</label>
                 <input type="text" id="name" name="name" placeholder="Entrez votre nom et prénom" required>
             </div>
+            <!-- Champ Adresse Email -->
+            <div class="form-group">
+                <label for="email">Adresse Email :</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
+            </div>
+            <!-- Champ Numéro de Téléphone (Facultatif) -->
+            <div class="form-group">
+                <label for="phone">Numéro de Téléphone (facultatif) :</label>
+                <input type="tel" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone">
+            </div>
             <!-- Champ Lien Réseaux -->
             <div class="form-group">
                 <label for="link">Lien de votre réseau :</label>
                 <input type="url" id="link" name="link" placeholder="Ex. https://linkedin.com" required>
-            </div>
-            <!-- Champ Descriptif -->
-            <div class="form-group">
-                <label for="description">Descriptif :</label>
-                <textarea id="description" name="description" rows="4" placeholder="Décrivez votre projet ou vos attentes..." required></textarea>
             </div>
             <!-- Case à cocher -->
             <div class="form-group checkbox">
@@ -82,9 +87,8 @@
             </div>
             <!-- Bouton Envoyer -->
             <button type="submit" class="submit-button" disabled>Envoyer</button>
-
         </form>
-    </section>
+    </section>    
     
     <footer class="footer">
         <div class="footer-container">
