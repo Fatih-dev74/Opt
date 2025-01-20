@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="description" content="Votre description ici">  -->
+    <title>Opt. Vitrine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="./assets/logo.png" alt="Logo Opt." class="logo-img">
+        </div>
+        <div class="menu-burger">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#services">Nos Services</a></li>
+                    <li><a href="#about">Collaborer</a></li>
+                    <li><a href="#contact">Contactez-nous</a></li>
+                </ul>
+            </nav>            
+        </div>
+    </header>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-content">
+            <img src="assets/services-image.png" alt="Illustration de nos services" class="services-image">
+            <p class="services-description">
+                OPT offre une gamme de services destinés à établir des partenariats forts entre créateurs et annonceurs, 
+                tout en fournissant un espace pour les organismes qui cherchent à accroître leur visibilité à travers des 
+                campagnes de sensibilisation.
+            </p>
+        </div>
+    </section>
+
+    <section id="about" class="collaboration">
+        <div class="collab-content">
+            <h2 class="collab-title">
+                <span class="highlight">Collaborer</span><br>
+                <span class="highlight-light">Influencer</span><br>
+                <span class="highlight">Engager</span>
+            </h2>
+            <p class="collab-description">
+                OPT est votre plateforme privilégiée pour la collaboration des créateurs de contenu, 
+                permettant aux talents émergents de s'associer à des personnalités établies pour promouvoir une cause commune.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-form">
+        <h2 class="form-title">Contactez-nous</h2>
+        <form id="collaboration-form">
+            <!-- Champ Nom et Prénom -->
+            <div class="form-group">
+                <label for="name">Nom et Prénom :</label>
+                <input type="text" id="name" name="name" placeholder="Entrez votre nom et prénom" required>
+            </div>
+            <!-- Champ Lien Réseaux -->
+            <div class="form-group">
+                <label for="link">Lien de votre réseau :</label>
+                <input type="url" id="link" name="link" placeholder="Ex. https://linkedin.com" required>
+            </div>
+            <!-- Champ Descriptif -->
+            <div class="form-group">
+                <label for="description">Descriptif :</label>
+                <textarea id="description" name="description" rows="4" placeholder="Décrivez votre projet ou vos attentes..." required></textarea>
+            </div>
+            <!-- Case à cocher -->
+            <div class="form-group checkbox">
+                <label for="agree">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    Je suis prêt(e) à collaborer
+                </label>
+            </div>
+            <!-- Bouton Envoyer -->
+            <button type="submit" class="submit-button" disabled>Envoyer</button>
+
+        </form>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Mentions légales et Copyright -->
+            <div class="footer-info">
+                <p>&copy; 2025 Opt. Tous droits réservés.</p>
+                <p class="footer-mentions">
+                    Hébergé par [Nom de l’hébergeur]. Contact : 
+                    <a href="mailto:contact@opt.com" class="footer-email">contact@opt.com</a>.
+                </p>
+            </div>
+    
+            <!-- Lien des réseaux sociaux -->
+            <div class="footer-social">
+                <a href="https://facebook.com" target="_blank" class="social-link">Facebook</a>
+                <a href="https://twitter.com" target="_blank" class="social-link">Twitter</a>
+                <a href="https://instagram.com" target="_blank" class="social-link">Instagram</a>
+            </div>
+        </div>
+    </footer>      
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>

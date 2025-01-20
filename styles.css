@@ -1,0 +1,391 @@
+/* Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding-top: 80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+.header {
+    background-color: #0e3a30;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo .logo-img {
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Menu Burger */
+.menu-burger {
+    position: relative;
+}
+
+.burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked + .burger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+#menu-toggle:checked + .burger span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked + .burger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: none;
+    position: fixed;
+    top: 80px; /* Juste en dessous du header */
+    left: 0;
+    width: 100%; /* Largeur complète */
+    background-color: #0e3a30;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    z-index: 9999;
+}
+
+#menu-toggle:checked ~ .nav-menu {
+    display: block;
+}
+
+.nav-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin: 10px 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #ff7f50;
+}
+
+/* Section Nos Services */
+.services {
+    padding: 4rem 1rem;
+    background-color: #ffffff; /* Fond blanc */
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; /* Ligne décorative légère */
+}
+
+.section-title {
+    font-size: 2.5rem; /* Taille légèrement réduite */
+    color: #333333;
+    margin-bottom: 1.5rem; /* Espacement réduit */
+    font-weight: 700; /* Gras */
+    letter-spacing: 1px; /* Espacement léger */
+}
+
+.services-description {
+    font-size: 1.1rem;
+    color: #555555; /* Couleur plus douce pour le texte */
+    line-height: 1.8;
+    margin: 0 auto;
+    max-width: 700px; /* Réduction de la largeur maximale */
+}
+
+.services-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* Espacement entre l'image et le texte */
+}
+
+.services-image {
+    width: 100%;
+    max-width: 500px; /* Ajuste la taille maximale de l'image */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet esthétique */
+}
+
+/* Section Collaboration */
+.collaboration {
+    background-color: #6ce49f; /* Vert clair */
+    padding: 4rem 1rem;
+    text-align: center;
+    color: #0e3a30; /* Texte en vert foncé */
+}
+
+.collab-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.collab-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.5rem; /* Réduction de l'espacement entre les lignes */
+    margin-bottom: 3rem; /* Réduction de l'espacement sous le titre */
+}
+
+.collab-title .highlight {
+    color: #0d362d; /* Vert foncé */
+    display: block; /* Forcer un retour à la ligne */
+}
+
+.collab-title .highlight-light {
+    color: #ffffff; /* Blanc pour contraste */
+    display: block; /* Forcer un retour à la ligne */
+}
+
+.collab-title .highlight:last-of-type {
+    color: #0d362d; /* Vert foncé */
+}
+
+.collab-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #0e3a30; /* Texte en vert foncé */
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+/* Section Formulaire */
+.contact-form {
+    background-color: #ffffff;
+    padding: 3rem 1rem;
+    text-align: center;
+    color: #0e3a30;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+form {
+    max-width: 400px; /* Réduction de la largeur totale du formulaire */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacement constant entre les champs */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Espacement entre label et champ */
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 350px; /* Réduction de la largeur des champs */
+    padding: 10px; /* Ajustement du padding pour plus de compacité */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Animation douce */
+    margin: 0 auto; /* Centre les champs */
+}
+
+/* Focus sur les champs */
+input:focus, textarea:focus {
+    border-color: #6ce49f; /* Vert clair pour le focus */
+    outline: none; /* Pas de contour par défaut */
+    background-color: #ffffff; /* Fond blanc pour indiquer le focus */
+}
+
+/* Champs de texte multi-lignes */
+textarea {
+    resize: vertical; /* Permet de redimensionner verticalement uniquement */
+    max-width: 350px; /* Réduction pour correspondre à la largeur des champs */
+}
+
+/* Case à cocher */
+.checkbox {
+    display: flex;
+    align-items: center; /* Aligne verticalement la case et le texte */
+    gap: 0.5rem; /* Espacement entre la case et le texte */
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+.checkbox input {
+    width: 18px; /* Taille de la case */
+    height: 18px; /* Taille de la case */
+    accent-color: #6ce49f; /* Couleur de la case cochée */
+}
+
+.checkbox label {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #333333; /* Couleur du texte */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espacement entre la case et le texte */
+    cursor: pointer; /* Rend la zone cliquable */
+}
+
+/* Bouton Envoyer */
+.submit-button {
+    background-color: #6ce49f;
+    color: #0e3a30;
+    padding: 10px 15px; /* Réduction de la taille interne */
+    font-size: 1rem; /* Taille du texte réduite */
+    border: none;
+    border-radius: 20px; /* Réduction du rayon pour arrondir moins */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase; /* Texte en majuscules pour un effet professionnel */
+    max-width: 200px; /* Largeur maximale définie */
+    margin: 0 auto; /* Centrer le bouton */
+}
+
+/* État désactivé */
+.submit-button:disabled {
+    background-color: #cccccc; /* Couleur grise */
+    color: #666666; /* Texte gris */
+    cursor: not-allowed; /* Indique que le bouton est inactif */
+    box-shadow: none;
+}
+
+/* État activé */
+.submit-button:hover:enabled {
+    background-color: #0d362d; /* Vert foncé au survol */
+    color: #ffffff;
+}
+
+/* Footer */
+.footer {
+    background-color: #0e3a30; /* Couleur du header pour rester cohérent */
+    color: #ffffff;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-top: 3px solid #6ce49f; /* Ligne décorative */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacement entre les sections */
+}
+
+.footer-info {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.footer-info p,
+.footer-info a {
+    margin: 0.5rem 0;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-info a:hover {
+    color: #6ce49f;
+    text-decoration: underline;
+}
+
+/* Mentions légales minimales */
+.footer-mentions {
+    font-size: 0.8rem; /* Texte plus discret */
+    color: #cccccc; /* Couleur grise discrète */
+    line-height: 1.5;
+}
+
+.footer-mentions a {
+    color: #6ce49f; /* Couleur du lien */
+    text-decoration: none;
+}
+
+.footer-mentions a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #6ce49f;
+}
+
+.footer-contact {
+    font-size: 1rem;
+}
+
+.footer-contact a {
+    color: #6ce49f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
