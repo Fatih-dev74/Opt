@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     background-color: #f4f4f4;
     padding-top: 80px;
 }
@@ -154,7 +154,7 @@ html {
 
 /* Section Collaboration */
 .collaboration {
-    background-color: #6ce49f; /* Vert clair */
+    background: linear-gradient(to bottom, #6ce49f, #0e3a30); /* Dégradé de blanc vers vert */
     padding: 4rem 1rem;
     text-align: center;
     color: #0e3a30; /* Texte en vert foncé */
@@ -189,10 +189,14 @@ html {
 .collab-description {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: #0e3a30; /* Texte en vert foncé */
+    color: #fff; /* Texte en vert foncé */
     max-width: 700px;
     margin: 0 auto;
     text-align: justify;
+}
+
+.collaboration, .services, .contact-form {
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
 /* Section Formulaire */

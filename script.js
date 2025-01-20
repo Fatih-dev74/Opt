@@ -4,14 +4,16 @@
 const form = document.getElementById('collaboration-form');
 const agreeCheckbox = document.getElementById('agree');
 const submitButton = document.querySelector('.submit-button');
-const inputs = form.querySelectorAll('input[type="text"], input[type="url"], textarea');
 
-// Fonction pour vérifier si tous les champs sont remplis
+// Sélectionne uniquement les champs obligatoires (nom, email, lien réseau)
+const requiredInputs = form.querySelectorAll('input[required]');
+
+// Fonction pour vérifier si tous les champs obligatoires sont remplis
 function checkFormCompletion() {
     let allFilled = true;
 
-    // Vérifie que tous les champs sont remplis
-    inputs.forEach(input => {
+    // Vérifie que tous les champs obligatoires sont remplis
+    requiredInputs.forEach(input => {
         if (!input.value.trim()) {
             allFilled = false;
         }
@@ -26,7 +28,7 @@ function checkFormCompletion() {
 }
 
 // Ajoute des événements pour vérifier les champs et la case
-inputs.forEach(input => {
+requiredInputs.forEach(input => {
     input.addEventListener('input', checkFormCompletion);
 });
 agreeCheckbox.addEventListener('change', checkFormCompletion);
