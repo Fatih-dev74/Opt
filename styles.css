@@ -78,9 +78,9 @@ html {
 .nav-menu {
     display: none;
     position: fixed;
-    top: 80px; /* Juste en dessous du header */
+    top: 80px;
     left: 0;
-    width: 100%; /* Largeur complète */
+    width: 100%;
     background-color: #0e3a30;
     padding: 1rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -113,119 +113,236 @@ html {
 .nav-menu a:hover {
     color: #ff7f50;
 }
-
-/* Section Nos Services */
-.services {
-    padding: 4rem 1rem;
-    background-color: #ffffff; /* Fond blanc */
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0; /* Ligne décorative légère */
-}
-
-.section-title {
-    font-size: 2.5rem; /* Taille légèrement réduite */
-    color: #333333;
-    margin-bottom: 1.5rem; /* Espacement réduit */
-    font-weight: 700; /* Gras */
-    letter-spacing: 1px; /* Espacement léger */
-}
-
-.services-description {
-    font-size: 1.1rem;
-    color: #555555; /* Couleur plus douce pour le texte */
-    line-height: 1.8;
-    margin: 0 auto;
-    max-width: 700px; /* Réduction de la largeur maximale */
-}
-
-.services-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem; /* Espacement entre l'image et le texte */
-}
-
-.services-image {
-    width: 100%;
-    max-width: 500px; /* Ajuste la taille maximale de l'image */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour un effet esthétique */
-}
-
-/* Section Collaboration */
-.collaboration {
-    background: linear-gradient(to bottom, #6ce49f, #0e3a30); /* Dégradé de blanc vers vert */
+/* Section principale avec fondu en haut et en bas */
+.main-section {
     padding: 4rem 1rem;
     text-align: center;
-    color: #0e3a30; /* Texte en vert foncé */
+    background: linear-gradient(to bottom, #ffffff, #6ce49f, #ffffff);
+    color: #0e3a30;
+    border: none;
 }
 
-.collab-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.collab-title {
-    font-size: 2.5rem;
+.main-title {
+    font-size: 3rem;
+    color: #0e3a30;
     font-weight: bold;
-    line-height: 1.5rem; /* Réduction de l'espacement entre les lignes */
-    margin-bottom: 3rem; /* Réduction de l'espacement sous le titre */
+    margin-bottom: 2rem;
 }
 
-.collab-title .highlight {
-    color: #0d362d; /* Vert foncé */
-    display: block; /* Forcer un retour à la ligne */
+.main-subtitle {
+    font-size: 1.5rem;
+    color: #333;
 }
 
-.collab-title .highlight-light {
-    color: #ffffff; /* Blanc pour contraste */
-    display: block; /* Forcer un retour à la ligne */
+/* Section Introduction */
+.introduction-section {
+    padding: 4rem 1rem;
+    background-color: #ffffff;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    border: none;
 }
 
-.collab-title .highlight:last-of-type {
-    color: #0d362d; /* Vert foncé */
+.introduction-title {
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.collab-description {
-    font-size: 1.2rem;
+.introduction-image-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.introduction-image {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.introduction-subtitle {
+    font-size: 1.1rem;
+    color: #555555;
     line-height: 1.8;
-    color: #fff; /* Texte en vert foncé */
-    max-width: 700px;
     margin: 0 auto;
-    text-align: justify;
+    max-width: 700px;
 }
 
-.collaboration, .services, .contact-form {
-    font-family: 'Poppins', Arial, sans-serif;
+/* Section Comment ça Fonctionne */
+.how-it-works-section {
+    padding: 4rem 1rem;
+    background-color: #f9f9f9;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    border: none;
+}
+
+.how-it-works-title {
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.how-it-works-intro {
+    font-size: 1.2rem;
+    color: #555555;
+    margin-bottom: 3rem;
+}
+
+.how-it-works-steps {
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+    padding-left: 1rem;
+    list-style: decimal inside;
+    color: #333333;
+    line-height: 1.8;
+}
+
+.how-it-works-steps li {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.how-it-works-steps strong {
+    color: #0e3a30;
+    font-weight: bold;
+}
+
+.how-it-works-outro {
+    font-size: 1.2rem;
+    color: #555555;
+    line-height: 1.8;
+}
+/* Bouton Appel à l'Action */
+.cta-button {
+    background-color: #6ce49f;
+    color: #ffffff;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+}
+
+.cta-button:hover {
+    background-color: #0d362d;
+    color: #ffffff;
+}
+
+.cta-button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Avantages pour les Créateurs */
+.advantages-section {
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffffff, #6ce49f, #0e3a30, #ffffff);
+    border: none;
+}
+
+.advantages-title {
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.advantages-intro {
+    font-size: 1.2rem;
+    color: #555555;
+    margin-bottom: 2rem;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantage-item {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advantage-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.advantage-icon {
+    font-size: 2.5rem;
+    color: #6ce49f;
+    margin-bottom: 1rem;
+}
+
+.advantage-heading {
+    font-size: 1.5rem;
+    color: #333333;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.advantage-description {
+    font-size: 1rem;
+    color: #555555;
+    line-height: 1.6;
 }
 
 /* Section Formulaire */
 .contact-form {
     background-color: #ffffff;
-    padding: 3rem 1rem;
+    padding: 4rem 1rem;
     text-align: center;
-    color: #0e3a30;
-    border-top: 1px solid #e0e0e0;
 }
 
 .form-title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     font-weight: bold;
+    color: #333333;
 }
 
-form {
-    max-width: 400px; /* Réduction de la largeur totale du formulaire */
+/* Conteneur du formulaire */
+.form-container {
+    background-color: #ffffff;
+    max-width: 500px;
     margin: 0 auto;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Champs du formulaire */
+form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Espacement constant entre les champs */
+    gap: 1.5rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; /* Espacement entre label et champ */
+    gap: 0.5rem;
 }
 
 label {
@@ -236,90 +353,67 @@ label {
 
 input, textarea {
     width: 100%;
-    max-width: 350px; /* Réduction de la largeur des champs */
-    padding: 10px; /* Ajustement du padding pour plus de compacité */
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    color: #333333;
     background-color: #f9f9f9;
-    transition: border-color 0.3s ease, background-color 0.3s ease; /* Animation douce */
-    margin: 0 auto; /* Centre les champs */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Focus sur les champs */
 input:focus, textarea:focus {
-    border-color: #6ce49f; /* Vert clair pour le focus */
-    outline: none; /* Pas de contour par défaut */
-    background-color: #ffffff; /* Fond blanc pour indiquer le focus */
-}
-
-/* Champs de texte multi-lignes */
-textarea {
-    resize: vertical; /* Permet de redimensionner verticalement uniquement */
-    max-width: 350px; /* Réduction pour correspondre à la largeur des champs */
+    border-color: #6ce49f;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(108, 228, 159, 0.5);
 }
 
 /* Case à cocher */
 .checkbox {
     display: flex;
-    align-items: center; /* Aligne verticalement la case et le texte */
-    gap: 0.5rem; /* Espacement entre la case et le texte */
-    text-align: left; /* Aligne le texte à gauche */
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .checkbox input {
-    width: 18px; /* Taille de la case */
-    height: 18px; /* Taille de la case */
-    accent-color: #6ce49f; /* Couleur de la case cochée */
-}
-
-.checkbox label {
-    font-size: 1rem;
-    font-weight: normal;
-    color: #333333; /* Couleur du texte */
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; /* Espacement entre la case et le texte */
-    cursor: pointer; /* Rend la zone cliquable */
+    width: 18px;
+    height: 18px;
+    accent-color: #6ce49f;
 }
 
 /* Bouton Envoyer */
 .submit-button {
     background-color: #6ce49f;
-    color: #0e3a30;
-    padding: 10px 15px; /* Réduction de la taille interne */
-    font-size: 1rem; /* Taille du texte réduite */
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
     border: none;
-    border-radius: 20px; /* Réduction du rayon pour arrondir moins */
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase; /* Texte en majuscules pour un effet professionnel */
-    max-width: 200px; /* Largeur maximale définie */
-    margin: 0 auto; /* Centrer le bouton */
+    max-width: 200px;
+    margin: 0 auto;
 }
 
-/* État désactivé */
 .submit-button:disabled {
-    background-color: #cccccc; /* Couleur grise */
-    color: #666666; /* Texte gris */
-    cursor: not-allowed; /* Indique que le bouton est inactif */
-    box-shadow: none;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
 }
 
-/* État activé */
 .submit-button:hover:enabled {
-    background-color: #0d362d; /* Vert foncé au survol */
+    background-color: #0d362d;
     color: #ffffff;
 }
 
 /* Footer */
 .footer {
-    background-color: #0e3a30; /* Couleur du header pour rester cohérent */
+    background-color: #0e3a30;
     color: #ffffff;
     padding: 2rem 1rem;
     text-align: center;
-    border-top: 3px solid #6ce49f; /* Ligne décorative */
+    border-top: 3px solid #6ce49f;
 }
 
 .footer-container {
@@ -327,7 +421,7 @@ textarea {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Espacement entre les sections */
+    gap: 1.5rem;
 }
 
 .footer-info {
@@ -349,13 +443,13 @@ textarea {
 
 /* Mentions légales minimales */
 .footer-mentions {
-    font-size: 0.8rem; /* Texte plus discret */
-    color: #cccccc; /* Couleur grise discrète */
+    font-size: 0.8rem;
+    color: #cccccc;
     line-height: 1.5;
 }
 
 .footer-mentions a {
-    color: #6ce49f; /* Couleur du lien */
+    color: #6ce49f;
     text-decoration: none;
 }
 
