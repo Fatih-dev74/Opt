@@ -324,12 +324,13 @@ html {
 
 /* Conteneur du formulaire */
 .form-container {
-    background-color: #ffffff;
+    background: linear-gradient(to bottom, #6ce49f, #0e3a30); /* Dégradé du vert clair au vert foncé */
+    color: #ffffff; /* Texte blanc pour contraste */
     max-width: 500px;
     margin: 0 auto;
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
 }
 
 /* Champs du formulaire */
@@ -348,7 +349,7 @@ form {
 label {
     font-size: 1rem;
     font-weight: bold;
-    color: #333333;
+    color: #ffffff;
 }
 
 input, textarea {
