@@ -4,6 +4,12 @@
 const form = document.getElementById('collaboration-form');
 const agreeCheckbox = document.getElementById('agree');
 const submitButton = document.querySelector('.submit-button');
+const formMessage = document.createElement('p'); // Élément pour afficher les messages
+formMessage.style.marginTop = '10px';
+formMessage.style.fontSize = '1rem';
+formMessage.style.fontWeight = 'bold';
+formMessage.style.textAlign = 'center'; // Centrer le texte du message
+form.appendChild(formMessage); // Ajoute le message sous le formulaire
 
 // Sélectionne uniquement les champs obligatoires (nom, email, lien réseau)
 const requiredInputs = form.querySelectorAll('input[required]');
@@ -20,11 +26,7 @@ function checkFormCompletion() {
     });
 
     // Active/désactive le bouton en fonction des conditions
-    if (allFilled && agreeCheckbox.checked) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
-    }
+    submitButton.disabled = !(allFilled && agreeCheckbox.checked);
 }
 
 // Ajoute des événements pour vérifier les champs et la case
@@ -32,6 +34,47 @@ requiredInputs.forEach(input => {
     input.addEventListener('input', checkFormCompletion);
 });
 agreeCheckbox.addEventListener('change', checkFormCompletion);
+
+// Ajoute un événement de soumission pour gérer l'envoi via fetch
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    // Affiche un message de progression
+    formMessage.textContent = "Envoi en cours...";
+    formMessage.style.color = "#ffffff"; // Blanc pour le texte en cours d'envoi
+
+    // Récupère les données du formulaire
+    const formData = new FormData(form);
+
+    // Envoie les données au serveur via fetch
+    fetch('/submit-form', {
+        method: 'POST',
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de l'envoi");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Affiche un message de succès
+            formMessage.textContent = data.message || "Votre message a été envoyé avec succès !";
+            formMessage.style.color = "#6ce49f"; // Couleur verte de succès
+            // Réinitialise le formulaire
+            form.reset();
+            submitButton.disabled = true;
+        })
+        .catch(error => {
+            // Affiche un message d'erreur
+            formMessage.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
+            formMessage.style.color = "#ff3333"; // Couleur rouge pour l'erreur
+            console.error(error);
+        });
+});
 
 // ===== Gestion du menu burger ===== //
 
