@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Opt : La plateforme qui connecte créateurs, associations et marques pour promouvoir des causes qui comptent.">
     <title>Opt. Vitrine</title>
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./styles.min.css">
 </head>
 <body>
     <header class="header">
         <div class="logo">
-            <img src="./assets/logo.png" alt="Logo Opt." class="logo-img">
+            <img src="./assets/logo.webp" alt="Logo Opt." class="logo-img">
         </div>
         <div class="menu-burger">
             <input type="checkbox" id="menu-toggle">
@@ -39,9 +42,21 @@
 
     <!-- Section Introduction -->
     <section id="Introduction" class="introduction-section">
-        <h1 class="introduction-title">Bienvenue sur Opt</h1>
+        <h2 class="introduction-title">Bienvenue sur Opt</h2>
         <div class="introduction-image-container">
-            <img src="assets/image.jpg" alt="Collaboration et impact positif" class="introduction-image">
+            <img 
+                src="assets/image-480.webp" 
+                srcset="
+                    assets/image-480.webp 480w, 
+                    assets/image-768.webp 768w, 
+                    assets/image-1280.webp 1280w, 
+                    assets/image-1920.webp 1920w" 
+                sizes="(max-width: 480px) 480px, 
+                        (max-width: 768px) 768px, 
+                        (max-width: 1280px) 1280px, 
+                        1920px" 
+                alt="Collaboration et impact positif" 
+                class="introduction-image" loading="lazy">
         </div>
         <p class="introduction-subtitle">
             Bienvenue sur notre plateforme. Ici, nous croyons en la puissance des connexions authentiques. 
@@ -81,42 +96,36 @@
         <p class="advantages-intro">Découvrez les Opportunités avec Opt</p>
         <div class="advantages-grid">
             <div class="advantage-item">
-                <div class="advantage-icon">🌟</div>
                 <h3 class="advantage-heading">Nouvelles Opportunités de Collaboration</h3>
                 <p class="advantage-description">
                     Accédez à des partenariats enrichissants avec des associations et des marques qui partagent vos valeurs, sans aucun coût.
                 </p>
             </div>
             <div class="advantage-item">
-                <div class="advantage-icon">📸</div>
                 <h3 class="advantage-heading">Bénéficiez d’une Image Impactante</h3>
                 <p class="advantage-description">
                     En vous engageant dans des campagnes significatives, vous renforcez votre image en tant que créateur engagé, attirant ainsi un public conscient et réceptif.
                 </p>
             </div>
             <div class="advantage-item">
-                <div class="advantage-icon">📈</div>
                 <h3 class="advantage-heading">Favorisez Votre Visibilité et Notoriété</h3>
                 <p class="advantage-description">
                     Chaque collaboration booste votre exposition et vous aide à vous faire connaître, tout en soutenant des causes qui vous tiennent à cœur.
                 </p>
             </div>
             <div class="advantage-item">
-                <div class="advantage-icon">💬</div>
                 <h3 class="advantage-heading">Améliorez Votre Taux d'Engagement</h3>
                 <p class="advantage-description">
                     En travaillant sur des projets qui résonnent avec votre audience, vous augmentez naturellement votre taux d'engagement.
                 </p>
             </div>
             <div class="advantage-item">
-                <div class="advantage-icon">🌍</div>
                 <h3 class="advantage-heading">Participez à la Promotion de Causes Importantes</h3>
                 <p class="advantage-description">
                     En vous associant à des profils qui défendent ces causes, vous devenez un ambassadeur du changement, inspirant vos abonnés et la communauté.
                 </p>
             </div>
             <div class="advantage-item">
-                <div class="advantage-icon">💡</div>
                 <h3 class="advantage-heading">Créez un Impact Réel</h3>
                 <p class="advantage-description">
                     Collaborez pour faire la différence et soyez fier de contribuer à des campagnes qui ont un effet positif tangible sur la société.
@@ -133,22 +142,22 @@
                 <!-- Champ Nom et Prénom -->
                 <div class="form-group">
                     <label for="name">Nom et Prénom :</label>
-                    <input type="text" id="name" name="name" placeholder="Entrez votre nom et prénom" required>
+                    <input type="text" id="name" name="name" autocomplete="name" placeholder="Entrez votre nom et prénom" required>
                 </div>
                 <!-- Champ Adresse Email -->
                 <div class="form-group">
                     <label for="email">Adresse Email :</label>
-                    <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="Entrez votre adresse email" required>
                 </div>
                 <!-- Champ Numéro de Téléphone (Facultatif) -->
                 <div class="form-group">
                     <label for="phone">Numéro de Téléphone (facultatif) :</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone">
+                    <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Entrez votre numéro de téléphone">
                 </div>
                 <!-- Champ Lien Réseaux -->
                 <div class="form-group">
                     <label for="link">Lien de votre réseau :</label>
-                    <input type="url" id="link" name="link" placeholder="Ex. https://linkedin.com" required>
+                    <input type="url" id="link" name="link" autocomplete="url" placeholder="Ex. https://linkedin.com" required>
                 </div>
                 <!-- Case à cocher -->
                 <div class="form-group checkbox">
