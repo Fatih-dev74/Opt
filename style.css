@@ -125,7 +125,7 @@ html {
 }
 
 .main-title {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #0e3a30;
     font-weight: 600;
     font-style: italic;
@@ -135,6 +135,25 @@ html {
 .main-subtitle {
     font-size: 1.5rem;
     color: #333;
+    margin-bottom: 5rem; /* Ajout d'un espacement supplémentaire avant le bouton */
+}
+/* Styles pour le bouton d'appel à l'action */
+.main-section .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #0e3a30;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-section .cta-button:hover {
+    background-color: #094d3c;
+    transform: scale(1.05); /* Légère mise en avant au survol */
 }
 
 /* Section Introduction */
