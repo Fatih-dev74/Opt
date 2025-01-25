@@ -62,7 +62,7 @@ app.post("/submit-form", async (req, res) => {
     console.log("Email envoyé :", info.response);
 
     res.status(200).json({
-      message: "Votre message a été envoyé avec succès. Merci pour votre collaboration !",
+      message: "Votre message a été envoyé avec succès. Merci pour votre collaboration",
     });
   } catch (error) {
     console.error("Erreur lors de l'envoi de l'email :", error.message);
