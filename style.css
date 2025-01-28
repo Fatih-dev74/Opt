@@ -40,7 +40,20 @@ html {
 
 /* Menu Burger */
 .menu-burger {
-    position: relative;
+    position: block;
+}
+
+.menu-burger .nav-menu {
+    display: none;
+}
+
+#menu-toggle:checked ~ .nav-menu {
+    display: block;
+}
+
+/* Navigation classique (visible en tablette) */
+.nav-menu-tablette {
+    display: none;
 }
 
 .burger {
@@ -115,13 +128,15 @@ html {
     color: #ff7f50;
 }
 
-/* Section principale avec fondu en haut et en bas */
+/* Section principale */
 .main-section {
     padding: 4rem 1rem;
     text-align: center;
     background: linear-gradient(to bottom, #ffffff, #6ce49f, #ffffff);
     color: #0e3a30;
     border: none;
+    max-width: 100%; /* Pleine largeur pour mobile */
+    margin: 0 auto;
 }
 
 .main-title {
@@ -129,14 +144,17 @@ html {
     color: #0e3a30;
     font-weight: 600;
     font-style: italic;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
 }
 
 .main-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #333;
-    margin-bottom: 5rem; /* Ajout d'un espacement supplémentaire avant le bouton */
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
 }
+
 /* Styles pour le bouton d'appel à l'action */
 .main-section .cta-button {
     display: inline-block;
@@ -153,7 +171,7 @@ html {
 
 .main-section .cta-button:hover {
     background-color: #094d3c;
-    transform: scale(1.05); /* Légère mise en avant au survol */
+    transform: scale(1.05);
 }
 
 /* Section Introduction */
@@ -452,6 +470,7 @@ input:focus, textarea:focus {
     gap: 1.5rem;
 }
 
+/* Mentions légales */
 .footer-info {
     font-size: 0.9rem;
     text-align: center;
@@ -469,49 +488,37 @@ input:focus, textarea:focus {
     text-decoration: underline;
 }
 
-/* Mentions légales minimales */
-.footer-mentions {
-    font-size: 0.8rem;
-    color: #cccccc;
-    line-height: 1.5;
-}
-
-.footer-mentions a {
-    color: #6ce49f;
-    text-decoration: none;
-}
-
-.footer-mentions a:hover {
-    text-decoration: underline;
-}
-
+/* Section Réseaux Sociaux */
 .footer-social {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.social-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-}
-
-.social-link:hover {
-    color: #6ce49f;
-}
-
-.footer-contact {
-    font-size: 1rem;
-}
-
-.footer-contact a {
-    color: #6ce49f;
-    text-decoration: none;
+.instagram-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
     font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out;
 }
 
-.footer-contact a:hover {
-    text-decoration: underline;
+.instagram-link:hover {
+    color: #6ce49f;
+}
+
+/* Icône Instagram */
+.social-icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(1); /* Rendre l'icône blanche */
+    transition: transform 0.3s ease-in-out;
+}
+
+.instagram-link:hover .social-icon {
+    transform: scale(1.1);
 }

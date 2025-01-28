@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -30,9 +31,15 @@
                     <li><a href="#about">Les avantages</a></li>
                     <li><a href="#contact">Contactez-nous</a></li>
                 </ul>
-            </nav>            
+            </nav>
         </div>
-    </header>
+        <nav class="nav-menu-tablette">
+            <a href="#Introduction">Introduction</a>
+            <a href="#how-it-works">Comment ça marche</a>
+            <a href="#about">Les avantages</a>
+            <a href="#contact">Contactez-nous</a>
+        </nav>
+    </header>    
 
     <!-- Section principale -->
     <section class="main-section">
@@ -45,25 +52,27 @@
     <!-- Section Introduction -->
     <section id="Introduction" class="introduction-section">
         <h2 class="introduction-title">Bienvenue sur Opt</h2>
-        <div class="introduction-image-container">
-            <img 
-                src="assets/image-480.webp" 
-                srcset="
-                    assets/image-480.webp 480w, 
-                    assets/image-768.webp 768w, 
-                    assets/image-1280.webp 1280w, 
-                    assets/image-1920.webp 1920w" 
-                sizes="(max-width: 480px) 480px, 
-                        (max-width: 768px) 768px, 
-                        (max-width: 1280px) 1280px, 
-                        1920px" 
-                alt="Collaboration et impact positif" 
-                class="introduction-image" loading="lazy">
+        <div class="introduction-container">
+            <div class="introduction-image-container">
+                <img 
+                    src="assets/image-480.webp" 
+                    srcset="
+                        assets/image-480.webp 480w, 
+                        assets/image-768.webp 768w, 
+                        assets/image-1280.webp 1280w, 
+                        assets/image-1920.webp 1920w" 
+                    sizes="(max-width: 480px) 480px, 
+                            (max-width: 768px) 768px, 
+                            (max-width: 1280px) 1280px, 
+                            1920px" 
+                    alt="Collaboration et impact positif" 
+                    class="introduction-image" loading="lazy">
+            </div>
+            <p class="introduction-subtitle">
+                Bienvenue sur notre plateforme. Ici, nous croyons en la puissance des connexions authentiques. 
+                Nous vous invitons à explorer des collaborations où l'accent est mis sur la transparence et l'engagement mutuel.
+            </p>
         </div>
-        <p class="introduction-subtitle">
-            Bienvenue sur notre plateforme. Ici, nous croyons en la puissance des connexions authentiques. 
-            Nous vous invitons à explorer des collaborations où l'accent est mis sur la transparence et l'engagement mutuel.
-        </p>
     </section>
 
     <!-- Section Comment ça Fonctionne -->
@@ -190,14 +199,16 @@
                 </p>
             </div>
     
-            <!-- Lien des réseaux sociaux -->
+            <!-- Lien Instagram uniquement -->
             <div class="footer-social">
-                <a href="https://facebook.com" target="_blank" class="social-link">Facebook</a>
-                <a href="https://twitter.com" target="_blank" class="social-link">Twitter</a>
-                <a href="https://instagram.com" target="_blank" class="social-link">Instagram</a>
+                <a href="https://www.instagram.com/optweare?igsh=cG0xZmJxZXF3N2l3" 
+                target="_blank" class="social-link instagram-link">
+                    <i class="fab fa-instagram"></i>
+                    Suivez-nous sur Instagram
+                </a>
             </div>
         </div>
-    </footer>      
+    </footer>       
 
     <script src="script.js" defer></script>
 

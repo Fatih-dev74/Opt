@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 // Endpoint pour tester l'envoi d'e-mails
 app.post("/submit-form", async (req, res) => {
-  const { name, email, phone, link, agree } = req.body;
+  const { name, email, phone, location, link, agree } = req.body;
 
   // Vérifie si la case à cocher "agree" est cochée
   if (!agree) {
@@ -50,6 +50,7 @@ app.post("/submit-form", async (req, res) => {
       <p><strong>Nom :</strong> ${name}</p>
       <p><strong>Email :</strong> ${email}</p>
       <p><strong>Numéro de Téléphone :</strong> ${phone || "Non fourni"}</p>
+      <p><strong>Localisation :</strong> ${location || "Non spécifiée"}</p>
       <p><strong>Lien Réseau :</strong> <a href="${link}" target="_blank">${link}</a></p>
       <p>Merci de considérer cette demande. Vous pouvez répondre directement à cet e-mail.</p>
     `,
