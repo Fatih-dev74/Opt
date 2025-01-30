@@ -515,6 +515,7 @@ input:focus, textarea:focus {
     gap: 0.5rem;
 }
 
+/* Icône Instagram */
 .instagram-link {
     display: flex;
     align-items: center;
@@ -530,14 +531,23 @@ input:focus, textarea:focus {
     color: #6ce49f;
 }
 
-/* Icône Instagram */
-.social-icon {
-    width: 24px;
-    height: 24px;
-    filter: invert(1); /* Rendre l'icône blanche */
-    transition: transform 0.3s ease-in-out;
+/* Liens des pages légales */
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
-.instagram-link:hover .social-icon {
-    transform: scale(1.1);
+.footer-legal a {
+    color: #ffffff;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-legal a:hover {
+    color: #6ce49f;
+    text-decoration: underline;
 }
