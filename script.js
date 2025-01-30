@@ -1,3 +1,24 @@
+// ===== Blocage des versions tablette et desktop ===== //
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth >= 768) {
+        document.body.innerHTML = `
+            <div style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #000;
+                color: #fff;
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 20px;
+            ">
+                <p>⚠️ Ce site est actuellement optimisé uniquement pour mobile. <br> Veuillez accéder via un smartphone.</p>
+            </div>
+        `;
+    }
+});
+
 // ===== Gestion du formulaire ===== //
 
 // Sélection des éléments du formulaire
