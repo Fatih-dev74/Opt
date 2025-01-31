@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 font-size: 1.5rem;
                 padding: 20px;
             ">
-                <p>⚠️ Ce site est actuellement optimisé uniquement pour mobile. <br> Veuillez accéder via un smartphone.</p>
+                <p>⚠️ Ce site est actuellement disponible uniquement sur mobile. <br> Veuillez accéder via un smartphone.</p>
             </div>
         `;
     }
