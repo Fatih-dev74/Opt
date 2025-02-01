@@ -68,7 +68,7 @@ form.addEventListener('submit', (e) => {
     const formData = new FormData(form);
 
     // Envoie les données au serveur via fetch
-    fetch('/submit-form', {
+    fetch("http://147.93.94.253:3000", {
         method: 'POST',
         body: JSON.stringify(Object.fromEntries(formData)),
         headers: {

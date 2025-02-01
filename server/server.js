@@ -75,4 +75,4 @@ app.post("/submit-form", async (req, res) => {
 });
 
 // Démarrer le serveur
-app.listen(PORT, () => console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Serveur en cours d'exécution sur http://localhost:${PORT}`));
