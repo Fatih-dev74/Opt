@@ -5,7 +5,7 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const PORT = 3000; // Port du serveur
+const PORT = 3000;
 
 // Middleware
 app.use(cors());
@@ -20,30 +20,27 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html")); // Servir le fichier HTML
 });
 
-// Endpoint pour tester l'envoi d'e-mails
+// Endpoint pour recevoir et traiter le formulaire
 app.post("/submit-form", async (req, res) => {
   const { name, email, phone, location, link, agree } = req.body;
 
-  // Vérifie si la case à cocher "agree" est cochée
   if (!agree) {
     return res.status(400).json({
       message: "Veuillez accepter les termes pour collaborer.",
     });
   }
 
-  // Configurer le transporteur Nodemailer
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER, // Adresse Gmail
-      pass: process.env.EMAIL_PASS, // Mot de passe spécifique pour les applications
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
-  // Définir les options de l'e-mail
   const mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER}>`, // Nom et adresse de l'expéditeur
-    to: process.env.RECEIVER_EMAIL || "destinataire@exemple.com", // Adresse de destination
+    from: `"${name}" <${process.env.EMAIL_USER}>`,
+    to: process.env.RECEIVER_EMAIL || "destinataire@exemple.com",
     subject: `Nouvelle demande de collaboration de ${name}`,
     html: `
       <h3>Nouvelle demande de collaboration</h3>
@@ -58,12 +55,11 @@ app.post("/submit-form", async (req, res) => {
   };
 
   try {
-    // Envoyer l'e-mail
     const info = await transporter.sendMail(mailOptions);
     console.log("Email envoyé :", info.response);
 
     res.status(200).json({
-      message: "Votre message a été envoyé avec succès. Merci pour votre collaboration",
+      message: "Votre message a été envoyé avec succès. Merci pour votre collaboration.",
     });
   } catch (error) {
     console.error("Erreur lors de l'envoi de l'email :", error.message);

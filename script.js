@@ -1,27 +1,4 @@
-// ===== Blocage des versions tablette et desktop ===== //
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.innerWidth >= 768) {
-        document.body.innerHTML = `
-            <div style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                background-color: #000;
-                color: #fff;
-                text-align: center;
-                font-size: 1.5rem;
-                padding: 20px;
-            ">
-                <p>⚠️ Ce site est actuellement disponible uniquement sur mobile. <br> Veuillez accéder via un smartphone.</p>
-            </div>
-        `;
-    }
-});
-
 // ===== Gestion du formulaire ===== //
-
-// Sélection des éléments du formulaire
 const form = document.getElementById('collaboration-form');
 const agreeCheckbox = document.getElementById('agree');
 const submitButton = document.querySelector('.submit-button');
@@ -56,56 +33,14 @@ requiredInputs.forEach(input => {
 });
 agreeCheckbox.addEventListener('change', checkFormCompletion);
 
-// Ajoute un événement de soumission pour gérer l'envoi via fetch
+// Ajoute un événement de soumission pour gérer l'envoi via le formulaire
 form.addEventListener('submit', (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
 
     // Affiche un message de progression
-    formMessage.textContent = "Envoi en cours...";
-    formMessage.style.color = "#ffffff"; // Blanc pour le texte en cours d'envoi
+    formMessage.textContent = "Envoi en cours...";  
+    formMessage.style.color = "#ffffff"; 
 
-    // Récupère les données du formulaire
-    const formData = new FormData(form);
-
-    // Envoie les données au serveur via fetch
-    fetch("http://147.93.94.253:3000/submit-form", {
-        method: 'POST',
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: {
-        'Content-Type': 'application/json',
-        },
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erreur lors de l'envoi");
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Affiche un message de succès
-            formMessage.textContent = data.message || "Votre message a été envoyé avec succès !";
-            formMessage.style.color = "#6ce49f"; // Couleur verte de succès
-            // Réinitialise le formulaire
-            form.reset();
-            submitButton.disabled = true;
-        })
-        .catch(error => {
-            // Affiche un message d'erreur
-            formMessage.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
-            formMessage.style.color = "#ff3333"; // Couleur rouge pour l'erreur
-            console.error(error);
-        });
-});
-
-// ===== Gestion du menu burger ===== //
-
-// Sélection des éléments du menu burger
-const menuToggle = document.getElementById('menu-toggle');
-const menuLinks = document.querySelectorAll('.nav-menu a');
-
-// Fermer le menu burger après un clic sur un lien
-menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.checked = false; // Décoche la case pour fermer le menu
-    });
+    // Soumettre le formulaire avec les données
+    form.submit();
 });
