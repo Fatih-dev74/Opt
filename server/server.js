@@ -26,10 +26,22 @@ const corsOptions = {
     allowedHeaders: "Origin, Content-Type, Accept",
     credentials: true
 };
-app.use(cors(corsOptions));
 
-// ✅ Gestion des requêtes préflight
-app.options("*", cors(corsOptions));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || origin === "https://optweare.com") {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS bloqué"));
+        }
+    },
+    methods: "GET, POST, OPTIONS",
+    allowedHeaders: ["Content-Type"],
+    credentials: true
+}));
+
+app.options("*", cors()); // Gère les requêtes preflight
+
 
 // ✅ Middleware global CORS (résout les blocages mobiles et Firefox)
 app.use((req, res, next) => {
@@ -57,63 +69,69 @@ app.get("/test", (req, res) => {
 
 // ✅ Route soumission formulaire
 app.post("/submit-form", async (req, res) => {
-    console.log("📩 Requête reçue sur /submit-form");
-    console.log("Données reçues :", req.body);
-
-    const { name, email, phone, location, link, agree } = req.body;
-
-    if (!agree) {
-        return res.status(400).json({ message: "Veuillez accepter les termes pour collaborer." });
-    }
-
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.RECEIVER_EMAIL) {
-        console.error("❌ Erreur SMTP : Variables manquantes.");
-        return res.status(500).json({ message: "Erreur de configuration du serveur." });
-    }
-
-    // ✅ Configuration SMTP Nodemailer
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-        tls: { rejectUnauthorized: false },
-    });
-
     try {
-        await transporter.verify();
-        console.log("✅ Connexion SMTP réussie !");
+        console.log("📩 Nouvelle requête reçue sur /submit-form");
+        console.log("Données reçues :", req.body);
+
+        const { name, email, phone, location, link, agree } = req.body;
+
+        if (!agree) {
+            return res.status(400).json({ message: "Veuillez accepter les termes pour collaborer." });
+        }
+
+        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.RECEIVER_EMAIL) {
+            console.error("❌ Erreur SMTP : Variables manquantes.");
+            return res.status(500).json({ message: "Erreur de configuration du serveur." });
+        }
+
+        // ✅ CONFIGURATION SMTP NODEMAILER
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+            tls: { rejectUnauthorized: false },
+        });
+
+        try {
+            await transporter.verify();
+            console.log("✅ Connexion SMTP réussie !");
+        } catch (err) {
+            console.error("❌ Erreur SMTP :", err.message);
+            return res.status(500).json({ message: "Problème avec SMTP.", error: err.message });
+        }
+
+        // ✅ CRÉATION EMAIL
+        const mailOptions = {
+            from: `"${name}" <${process.env.EMAIL_USER}>`,
+            to: process.env.RECEIVER_EMAIL,
+            subject: `Nouvelle demande de collaboration de ${name}`,
+            html: `
+                <h3>Nouvelle demande de collaboration</h3>
+                <p><strong>Nom :</strong> ${name}</p>
+                <p><strong>Email :</strong> ${email}</p>
+                <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
+                <p><strong>Localisation :</strong> ${location || "Non spécifiée"}</p>
+                <p><strong>Lien Réseau :</strong> <a href="${link}" target="_blank">${link}</a></p>
+            `,
+            replyTo: email,
+        };
+
+        try {
+            const info = await transporter.sendMail(mailOptions);
+            console.log("✅ Email envoyé :", info.response);
+            res.status(200).json({ message: "Votre message a été envoyé avec succès." });
+        } catch (error) {
+            console.error("❌ Erreur d'envoi email :", error.message);
+            console.error(error); // Ajoute cette ligne pour voir plus de détails
+            res.status(500).json({ message: "Erreur d'envoi de l'email." });
+        }
     } catch (err) {
-        console.error("❌ Erreur SMTP :", err.message);
-        return res.status(500).json({ message: "Problème avec SMTP." });
-    }
-
-    // ✅ Création email
-    const mailOptions = {
-        from: `"${name}" <${process.env.EMAIL_USER}>`,
-        to: process.env.RECEIVER_EMAIL,
-        subject: `Nouvelle demande de collaboration de ${name}`,
-        html: `
-            <h3>Nouvelle demande de collaboration</h3>
-            <p><strong>Nom :</strong> ${name}</p>
-            <p><strong>Email :</strong> ${email}</p>
-            <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
-            <p><strong>Localisation :</strong> ${location || "Non spécifiée"}</p>
-            <p><strong>Lien Réseau :</strong> <a href="${link}" target="_blank">${link}</a></p>
-        `,
-        replyTo: email,
-    };
-
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log("✅ Email envoyé :", info.response);
-        res.status(200).json({ message: "Votre message a été envoyé avec succès." });
-    } catch (error) {
-        console.error("❌ Erreur d'envoi email :", error.message);
-        res.status(500).json({ message: "Erreur d'envoi de l'email." });
+        console.error("❌ Erreur inattendue :", err);
+        res.status(500).json({ message: "Une erreur est survenue." });
     }
 });
 
