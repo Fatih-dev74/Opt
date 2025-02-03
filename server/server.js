@@ -27,20 +27,18 @@ const corsOptions = {
     credentials: true
 };
 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || origin === "https://optweare.com") {
-            callback(null, true);
-        } else {
-            callback(new Error("CORS bloqué"));
-        }
-    },
+const corsOptions = {
+    origin: ["https://optweare.com", "https://www.optweare.com"], // Autoriser les variantes du domaine
     methods: "GET, POST, OPTIONS",
     allowedHeaders: ["Content-Type"],
     credentials: true
-}));
+};
 
-app.options("*", cors()); // Gère les requêtes preflight
+app.use(cors(corsOptions));
+
+// ✅ Gestion des requêtes "preflight" (OPTIONS) pour éviter les erreurs CORS
+app.options("*", cors(corsOptions));
+
 
 
 // ✅ Middleware global CORS (résout les blocages mobiles et Firefox)

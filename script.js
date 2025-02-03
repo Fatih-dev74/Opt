@@ -76,7 +76,6 @@ form.addEventListener('submit', async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             }
-            credentials: "include"
         });        
 
         if (!response.ok) {
