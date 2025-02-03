@@ -10,18 +10,23 @@ console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "✔️ Chargé" : "❌ Manq
 console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
-// ✅ Middleware CORS (permet l'accès depuis le site)
-// ✅ Middleware CORS (permet l'accès depuis ton site)
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://optweare.com"); // 🔥 Autorise uniquement ton domaine
+const cors = require("cors");
+
+// ✅ Middleware CORS pour autoriser ton site
+app.use(cors({
+    origin: "https://optweare.com", // ⚠️ Mets l'URL de ton frontend !
+    methods: "GET, POST, OPTIONS",
+    allowedHeaders: "Origin, Content-Type, Accept"
+}));
+
+// ✅ Gestion des requêtes OPTIONS (préflight)
+app.options("*", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://optweare.com");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(200); // ✅ Répond directement aux requêtes préflight CORS
-    }
-    next();
+    res.sendStatus(200);
 });
 
 app.use(express.urlencoded({ extended: true }));
