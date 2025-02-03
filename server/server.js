@@ -12,66 +12,45 @@ console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ Configuration de CORS pour autoriser ton site uniquement
-const corsOptions = {
-    origin: "https://optweare.com", // Remplace par l'URL de ton site frontend
+// ✅ CONFIGURATION CORS : Autoriser uniquement ton frontend
+app.use(cors({
+    origin: "https://optweare.com", // Lien du frontend
     methods: "GET, POST, OPTIONS",
-    allowedHeaders: "Origin, Content-Type, Accept",
-};
+    allowedHeaders: ["Content-Type"],
+    credentials: true
+}));
 
-app.use(cors(corsOptions));
+// ✅ GESTION DES PRÉ-FLIGHT REQUESTS (OPTIONS)
+app.options("*", cors()); 
 
-// ✅ Middleware global pour éviter les blocages CORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://optweare.com"); 
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
-    }
-
-    next();
-});
-
-// ✅ Middleware pour traiter JSON et formulaires
-app.use(express.urlencoded({ extended: true }));
+// ✅ Middleware JSON
 app.use(express.json());
 
-// ✅ Servir les fichiers statiques
+// ✅ Middleware Static Files (si besoin)
 app.use(express.static(path.join(__dirname, "../")));
 
-// ✅ Route principale pour vérifier si le serveur tourne
-app.get("/", (req, res) => {
-    res.send("🚀 Serveur en ligne ! ✅");
-});
-
-// ✅ Route de test pour s'assurer que le backend fonctionne
+// ✅ ROUTE PRINCIPALE TEST API
 app.get("/test", (req, res) => {
     res.json({ message: "🚀 API OK", status: 200 });
 });
 
-// ✅ Endpoint du formulaire
+// ✅ ROUTE SOUMISSION FORMULAIRE
 app.post("/submit-form", async (req, res) => {
-    console.log("📩 Nouvelle requête reçue sur /submit-form");
+    console.log("📩 Requête reçue sur /submit-form");
     console.log("Données reçues :", req.body);
 
     const { name, email, phone, location, link, agree } = req.body;
 
     if (!agree) {
-        return res.status(400).json({
-            message: "Veuillez accepter les termes pour collaborer.",
-        });
+        return res.status(400).json({ message: "Veuillez accepter les termes pour collaborer." });
     }
 
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.RECEIVER_EMAIL) {
-        console.error("❌ Erreur : Variables d'environnement SMTP manquantes.");
-        return res.status(500).json({
-            message: "Erreur de configuration du serveur. Veuillez contacter l'administrateur.",
-        });
+        console.error("❌ Erreur SMTP : Variables manquantes.");
+        return res.status(500).json({ message: "Erreur de configuration du serveur." });
     }
 
-    // ✅ Configuration du transporteur Nodemailer
+    // ✅ CONFIGURATION SMTP NODEMAILER
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -80,23 +59,18 @@ app.post("/submit-form", async (req, res) => {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
         },
-        tls: {
-            rejectUnauthorized: false,
-        },
+        tls: { rejectUnauthorized: false },
     });
 
     try {
         await transporter.verify();
         console.log("✅ Connexion SMTP réussie !");
     } catch (err) {
-        console.error("❌ Erreur de connexion SMTP :", err.message);
-        return res.status(500).json({
-            message: "Problème de connexion au serveur SMTP.",
-            error: err.message,
-        });
+        console.error("❌ Erreur SMTP :", err.message);
+        return res.status(500).json({ message: "Problème avec SMTP." });
     }
 
-    // ✅ Options de l'email
+    // ✅ CRÉATION EMAIL
     const mailOptions = {
         from: `"${name}" <${process.env.EMAIL_USER}>`,
         to: process.env.RECEIVER_EMAIL,
@@ -105,10 +79,9 @@ app.post("/submit-form", async (req, res) => {
             <h3>Nouvelle demande de collaboration</h3>
             <p><strong>Nom :</strong> ${name}</p>
             <p><strong>Email :</strong> ${email}</p>
-            <p><strong>Numéro de Téléphone :</strong> ${phone || "Non fourni"}</p>
+            <p><strong>Téléphone :</strong> ${phone || "Non fourni"}</p>
             <p><strong>Localisation :</strong> ${location || "Non spécifiée"}</p>
             <p><strong>Lien Réseau :</strong> <a href="${link}" target="_blank">${link}</a></p>
-            <p>Merci de considérer cette demande. Vous pouvez répondre directement à cet e-mail.</p>
         `,
         replyTo: email,
     };
@@ -118,15 +91,12 @@ app.post("/submit-form", async (req, res) => {
         console.log("✅ Email envoyé :", info.response);
         res.status(200).json({ message: "Votre message a été envoyé avec succès." });
     } catch (error) {
-        console.error("❌ Erreur lors de l'envoi de l'email :", error.message);
-        res.status(500).json({
-            message: "Erreur lors de l'envoi de l'email. Veuillez réessayer plus tard.",
-            error: error.message,
-        });
+        console.error("❌ Erreur d'envoi email :", error.message);
+        res.status(500).json({ message: "Erreur d'envoi de l'email." });
     }
 });
 
-// ✅ Démarrer le serveur
+// ✅ DÉMARRAGE SERVEUR
 app.listen(PORT, () => {
     console.log(`🚀 Serveur en ligne sur https://opt-backend-w7ff.onrender.com`);
 });

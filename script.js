@@ -70,7 +70,7 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // Envoie les données au serveur via fetch
-        const response = await fetch("https://opt-backend-w7ff.onrender.com", { 
+        const response = await fetch("https://opt-backend-w7ff.onrender.com/submit-form", { 
             method: 'POST',
             body: JSON.stringify(jsonData),
             headers: {
