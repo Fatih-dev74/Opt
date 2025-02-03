@@ -10,18 +10,16 @@ console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "✔️ Chargé" : "❌ Manq
 console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 4000;
 
 // ✅ Middleware CORS (permet les requêtes du frontend)
 app.use((req, res, next) => {
-    console.log(`🌐 Requête reçue : ${req.method} ${req.url}`);
-
-    res.header("Access-Control-Allow-Origin", "*"); // 🔥 Permet toutes les origines temporairement
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-
+    
     if (req.method === "OPTIONS") {
-        return res.sendStatus(200); // Répond aux requêtes préflight OPTIONS
+        return res.sendStatus(200);
     }
 
     next();
@@ -112,6 +110,6 @@ app.post("/submit-form", async (req, res) => {
 });
 
 // ✅ Démarrer le serveur
-app.listen(PORT, () => {
-    console.log(`🚀 Serveur en ligne : https://opt-backend-w7f.onrender.com sur le port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Serveur en ligne sur le port ${PORT}`);
 });
