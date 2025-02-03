@@ -10,20 +10,25 @@ console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "✔️ Chargé" : "❌ Manq
 console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors());
+// ✅ Middleware CORS (permet l'accès depuis le site)
+app.use(cors({
+    origin: "https://optweare.com", // Ton site front-end
+    methods: "GET,POST,OPTIONS",
+    allowedHeaders: "Content-Type",
+}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../"))); // Servir les fichiers statiques
 
-// Route pour la page d'accueil
+// ✅ Route principale
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../index.html"));
 });
 
-// Endpoint pour recevoir et traiter le formulaire
+// ✅ Endpoint du formulaire
 app.post("/submit-form", async (req, res) => {
     const { name, email, phone, location, link, agree } = req.body;
 
@@ -40,7 +45,7 @@ app.post("/submit-form", async (req, res) => {
         });
     }
 
-    // Configuration du transporteur Nodemailer
+    // ✅ Configuration du transporteur Nodemailer
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -65,7 +70,7 @@ app.post("/submit-form", async (req, res) => {
         });
     }
 
-    // Options de l'email
+    // ✅ Options de l'email
     const mailOptions = {
         from: `"${name}" <${process.env.EMAIL_USER}>`,
         to: process.env.RECEIVER_EMAIL,
@@ -95,7 +100,7 @@ app.post("/submit-form", async (req, res) => {
     }
 });
 
-// Démarrer le serveur
+// ✅ Démarrer le serveur
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Serveur en cours d'exécution sur port ${PORT}`);
+    console.log(`🚀 Serveur en ligne : https://opt-backend-w7f.onrender.com`);
 });

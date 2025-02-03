@@ -57,7 +57,7 @@ requiredInputs.forEach(input => {
 agreeCheckbox.addEventListener('change', checkFormCompletion);
 
 // Ajoute un événement de soumission pour gérer l'envoi via fetch
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
 
     // Affiche un message de progression
@@ -66,29 +66,36 @@ form.addEventListener('submit', (e) => {
 
     // Récupère les données du formulaire
     const formData = new FormData(form);
+    const jsonData = Object.fromEntries(formData);
 
+    try {
         // Envoie les données au serveur via fetch
-        fetch("https://opt-backend-w7f.onrender.com/submit-form", { 
+        const response = await fetch("https://opt-backend-w7f.onrender.com/submit-form", { 
             method: 'POST',
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: JSON.stringify(jsonData),
             headers: {
-            'Content-Type': 'application/json',
-            },
-        })
-        .then(data => {
-            // Affiche un message de succès
-            formMessage.textContent = data.message || "Votre message a été envoyé avec succès !";
-            formMessage.style.color = "#6ce49f"; // Couleur verte de succès
-            // Réinitialise le formulaire
-            form.reset();
-            submitButton.disabled = true;
-        })
-        .catch(error => {
-            // Affiche un message d'erreur
-            formMessage.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
-            formMessage.style.color = "#ff3333"; // Couleur rouge pour l'erreur
-            console.error(error);
+                'Content-Type': 'application/json'
+            }
         });
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur: ${response.status}`);
+        }
+
+        const data = await response.json(); // Récupère la réponse JSON
+        formMessage.textContent = data.message || "Votre message a été envoyé avec succès !";
+        formMessage.style.color = "#6ce49f"; // Couleur verte de succès
+
+        // Réinitialise le formulaire après l'envoi
+        form.reset();
+        submitButton.disabled = true;
+
+    } catch (error) {
+        // Affiche un message d'erreur
+        formMessage.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
+        formMessage.style.color = "#ff3333"; // Couleur rouge pour l'erreur
+        console.error("Erreur lors de la requête:", error);
+    }
 });
 
 // ===== Gestion du menu burger ===== //
