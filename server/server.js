@@ -10,41 +10,52 @@ console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "✔️ Chargé" : "❌ Manq
 console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 
-app.use(cors({
-    origin: "https://optweare.com", // Autorise seulement ton site
+// ✅ Configuration de CORS pour autoriser ton site uniquement
+const corsOptions = {
+    origin: "https://optweare.com", // 🔥 Autoriser uniquement ton frontend
     methods: "GET,POST,OPTIONS",
     allowedHeaders: "Origin, Content-Type, Accept"
-}));
+};
 
-// ✅ Middleware CORS (permet les requêtes du frontend)
+app.use(cors(corsOptions));
+
+// ✅ Middleware global pour éviter les blocages CORS
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "https://optweare.com");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-    
+
     if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
+        return res.sendStatus(204); // ✅ Répond correctement aux requêtes préflight
     }
 
     next();
 });
 
-// ✅ Middleware pour lire JSON et formulaires
+// ✅ Middleware pour traiter JSON et formulaires
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ✅ Servir les fichiers statiques (CSS, JS, images)
+// ✅ Servir les fichiers statiques
 app.use(express.static(path.join(__dirname, "../")));
 
-// ✅ Route principale
+// ✅ Route principale pour vérifier si le serveur tourne
 app.get("/", (req, res) => {
-    res.send("Serveur en ligne ! ✅");
+    res.send("🚀 Serveur en ligne ! ✅");
+});
+
+// ✅ Route de test pour s'assurer que le backend fonctionne
+app.get("/test", (req, res) => {
+    res.json({ message: "🚀 API OK", status: 200 });
 });
 
 // ✅ Endpoint du formulaire
 app.post("/submit-form", async (req, res) => {
+    console.log("📩 Nouvelle requête reçue sur /submit-form");
+    console.log("Données reçues :", req.body);
+
     const { name, email, phone, location, link, agree } = req.body;
 
     if (!agree) {
@@ -60,7 +71,7 @@ app.post("/submit-form", async (req, res) => {
         });
     }
 
-    // ✅ Configuration de Nodemailer
+    // ✅ Configuration du transporteur Nodemailer
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -116,6 +127,6 @@ app.post("/submit-form", async (req, res) => {
 });
 
 // ✅ Démarrer le serveur
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Serveur en ligne sur le port ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`🚀 Serveur en ligne sur https://opt-backend-w7ff.onrender.com`);
 });
