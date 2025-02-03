@@ -45,13 +45,15 @@ app.options("*", cors()); // Gère les requêtes preflight
 
 // ✅ Middleware global CORS (résout les blocages mobiles et Firefox)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+    res.header("Access-Control-Allow-Origin", "https://optweare.com"); // ✅ Autorise ton site
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-    res.header("Vary", "Origin"); // Important pour Firefox
+    res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+
     if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
+        return res.status(200).send(); // ✅ Répond immédiatement aux requêtes preflight
     }
+
     next();
 });
 
