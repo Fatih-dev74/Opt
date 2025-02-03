@@ -13,10 +13,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ✅ Middleware CORS (permet l'accès depuis le site)
+// ✅ Middleware CORS (permet l'accès depuis ton site)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // 🔥 Permet toutes les origines temporairement
+    res.header("Access-Control-Allow-Origin", "https://optweare.com"); // 🔥 Autorise uniquement ton domaine
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(200); // ✅ Répond directement aux requêtes préflight CORS
+    }
     next();
 });
 
