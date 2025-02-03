@@ -12,6 +12,12 @@ console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cors({
+    origin: "https://optweare.com", // Autorise seulement ton site
+    methods: "GET,POST,OPTIONS",
+    allowedHeaders: "Origin, Content-Type, Accept"
+}));
+
 // ✅ Middleware CORS (permet les requêtes du frontend)
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
