@@ -67,19 +67,13 @@ form.addEventListener('submit', (e) => {
     // Récupère les données du formulaire
     const formData = new FormData(form);
 
-    // Envoie les données au serveur via fetch
-    fetch("http://147.93.94.253:3000/submit-form", {
-        method: 'POST',
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: {
-        'Content-Type': 'application/json',
-        },
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erreur lors de l'envoi");
-            }
-            return response.json();
+        // Envoie les données au serveur via fetch
+        fetch("https://opt-backend-w7f.onrender.com/submit-form", { 
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+            'Content-Type': 'application/json',
+            },
         })
         .then(data => {
             // Affiche un message de succès
