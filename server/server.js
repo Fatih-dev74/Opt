@@ -4,7 +4,7 @@ const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
 
-console.log("📢 ENV CHARGÉ :");
+console.log("\uD83D\uDCE2 ENV CHARGÉ :");
 console.log("EMAIL_USER:", process.env.EMAIL_USER || "❌ Manquant");
 console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "✔️ Chargé" : "❌ Manquant");
 console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
@@ -12,29 +12,50 @@ console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ CONFIGURATION CORS : Autoriser uniquement ton frontend
-app.use(cors({
-    origin: "https://optweare.com", // Lien du frontend
+// ✅ Configuration CORS améliorée
+const corsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = ["https://optweare.com", "https://www.optweare.com"];
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS bloqué"));
+        }
+    },
     methods: "GET, POST, OPTIONS",
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: "Origin, Content-Type, Accept",
     credentials: true
-}));
+};
+app.use(cors(corsOptions));
 
-// ✅ GESTION DES PRÉ-FLIGHT REQUESTS (OPTIONS)
-app.options("*", cors()); 
+// ✅ Gestion des requêtes préflight
+app.options("*", cors(corsOptions));
+
+// ✅ Middleware global CORS (résout les blocages mobiles et Firefox)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+    res.header("Vary", "Origin"); // Important pour Firefox
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 // ✅ Middleware JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Middleware Static Files (si besoin)
+// ✅ Fichiers statiques
 app.use(express.static(path.join(__dirname, "../")));
 
-// ✅ ROUTE PRINCIPALE TEST API
+// ✅ Route de test
 app.get("/test", (req, res) => {
     res.json({ message: "🚀 API OK", status: 200 });
 });
 
-// ✅ ROUTE SOUMISSION FORMULAIRE
+// ✅ Route soumission formulaire
 app.post("/submit-form", async (req, res) => {
     console.log("📩 Requête reçue sur /submit-form");
     console.log("Données reçues :", req.body);
@@ -50,7 +71,7 @@ app.post("/submit-form", async (req, res) => {
         return res.status(500).json({ message: "Erreur de configuration du serveur." });
     }
 
-    // ✅ CONFIGURATION SMTP NODEMAILER
+    // ✅ Configuration SMTP Nodemailer
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -70,7 +91,7 @@ app.post("/submit-form", async (req, res) => {
         return res.status(500).json({ message: "Problème avec SMTP." });
     }
 
-    // ✅ CRÉATION EMAIL
+    // ✅ Création email
     const mailOptions = {
         from: `"${name}" <${process.env.EMAIL_USER}>`,
         to: process.env.RECEIVER_EMAIL,
@@ -96,7 +117,7 @@ app.post("/submit-form", async (req, res) => {
     }
 });
 
-// ✅ DÉMARRAGE SERVEUR
+// ✅ Démarrage serveur
 app.listen(PORT, () => {
     console.log(`🚀 Serveur en ligne sur https://opt-backend-w7ff.onrender.com`);
 });
