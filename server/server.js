@@ -36,6 +36,11 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../index.html"));
 });
 
+app.get("/", (req, res) => {
+    res.send("Serveur en ligne ! ✅");
+});
+
+
 // ✅ Endpoint du formulaire
 app.post("/submit-form", async (req, res) => {
     const { name, email, phone, location, link, agree } = req.body;
@@ -109,6 +114,6 @@ app.post("/submit-form", async (req, res) => {
 });
 
 // ✅ Démarrer le serveur
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Serveur en ligne : https://opt-backend-w7f.onrender.com`);
+app.listen(PORT, () => {
+    console.log(`🚀 Serveur en ligne : https://opt-backend-w7f.onrender.com sur le port ${PORT}`);
 });
