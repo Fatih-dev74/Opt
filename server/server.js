@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, "../")));
 
 // ✅ Route principale
 app.get("/", (req, res) => {
-    res.send("✅ Serveur en ligne !");
+    res.send("Serveur en ligne ! ✅");
 });
 
 // ✅ Endpoint du formulaire
