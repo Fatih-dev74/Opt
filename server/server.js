@@ -14,21 +14,21 @@ const PORT = process.env.PORT || 10000;
 
 // ✅ Configuration de CORS pour autoriser ton site uniquement
 const corsOptions = {
-    origin: "https://optweare.com", // 🔥 Autoriser uniquement ton frontend
-    methods: "GET,POST,OPTIONS",
-    allowedHeaders: "Origin, Content-Type, Accept"
+    origin: "https://optweare.com", // Remplace par l'URL de ton site frontend
+    methods: "GET, POST, OPTIONS",
+    allowedHeaders: "Origin, Content-Type, Accept",
 };
 
 app.use(cors(corsOptions));
 
 // ✅ Middleware global pour éviter les blocages CORS
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://optweare.com");
+    res.header("Access-Control-Allow-Origin", "https://optweare.com"); 
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
 
     if (req.method === "OPTIONS") {
-        return res.sendStatus(204); // ✅ Répond correctement aux requêtes préflight
+        return res.sendStatus(200);
     }
 
     next();
