@@ -12,8 +12,6 @@ console.log("RECEIVER_EMAIL:", process.env.RECEIVER_EMAIL || "❌ Manquant");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-const cors = require("cors");
-
 // ✅ Middleware CORS pour autoriser ton site
 app.use(cors({
     origin: "https://optweare.com", // ⚠️ Mets l'URL de ton frontend !
